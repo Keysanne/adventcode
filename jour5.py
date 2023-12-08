@@ -15,4 +15,4 @@ for x in range(0, len(number) - 1, 2):
 				nbr_ch = 0
 		if numbers < min:
 			min = numbers
-print(min)
+	print(min)
