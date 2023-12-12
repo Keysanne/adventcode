@@ -11,11 +11,9 @@ def	find_Z(where, route, g_d, rules):
 			nb += 1
 	return nb
 
-def ppmc(rst, x):
-	for value in rst:
-		if x % value != 0:
-			return 0
-	return 1
+import math
+def ppmc(a, b):
+	return a * b // math.gcd(a, b)
 
 file = open("ref", 'r')
 lines = file.read().split('\n')
@@ -29,8 +27,7 @@ where = [y for y in route if y[2] == 'A']
 rst = []
 for value in where:
 	rst.append(find_Z(value, route, g_d, rules))
-intervalle = 1000000000
-for x in range(intervalle, 10000000000):
-	if ppmc(rst, x) == 1:
-		print(x)
-		break
+r, *rst = rst
+for c in rst:
+	r = ppmc(r, c)
+print(r)
