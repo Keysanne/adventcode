@@ -1,15 +1,39 @@
+def	difference(a, b):
+	diff = 0
+	for x in range(0, len(a)):
+		if a[x] != b[x]:
+			diff += 1
+	return diff
+
 def	find_sym(tab):
 	for x in range(0, len(tab) - 1):
-		if tab[x] == tab[x + 1]: #check si un seul caractere different
+		smudge = 0
+		if tab[x] == tab[x + 1]:
 			a = x - 1
 			b = x + 2
 			while a >= 0 and b < len(tab):
-				if tab[a] != tab[b]:
-					sym = -1
+				diff = difference(tab[a], tab[b])
+				if diff == 1:
+					smudge += 1
+				elif diff > 1:
 					break
 				a -= 1
 				b += 1
-			if a < 0 or b >= len(tab):
+			if (a < 0 or b >= len(tab)) and smudge == 1:
+				return x + 1
+		elif difference(tab[x], tab[x + 1]) == 1:
+			a = x - 1
+			b = x + 2
+			smudge += 1
+			while a >= 0 and b < len(tab):
+				diff = difference(tab[a], tab[b])
+				if diff == 1:
+					smudge += 1
+				elif diff > 1:
+					break
+				a -= 1
+				b += 1
+			if (a < 0 or b >= len(tab)) and smudge == 1:
 				return x + 1
 	return 0
 
